@@ -1,12 +1,9 @@
 {
   "scripts": [
-    "out/injectConfig.js",
-    "src/main.js",
-    "src/dependencies/vue.js",
-    "src/dependencies/axios.js"
+    "out/main.js"
   ],
   "css": [
     "src/style.css"
   ],
-  "preprocessor": "src/loadConfigProcessor.js"
+  "preprocessor": "out/loadConfigProcessor.js"
 }

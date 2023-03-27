@@ -1,11 +1,20 @@
+import Reveal from '../node_modules/reveal.js/dist/reveal.esm.js'
+import axios from '../node_modules/axios/dist/esm/axios.min.js';
+import {Configurator} from '../out/injectConfig.js';
+import Vue from '../node_modules/vue/dist/vue.esm.browser.js'; // module based and for browser (not node)
+
 const apps = {}; // holds all injected Vue apps
-const topic = Configurator.group; // values sourced from config.json
+const topic = Configurator.group; // values sourced from reveal-config.json
 const poll_topic = topic +"_poll_topic";
 const question_topic = topic + "_question_topic";
 const meta_topic = topic + "_meta_topic";
 //java-2022_poll_topic
 
-console.log("Do this together..");
+
+Reveal.initialize({
+    plugins: []
+});
+
 Reveal.on( 'slidechanged', async event => {
     if(!isPoll(event.currentSlide)) return
 
@@ -16,7 +25,7 @@ Reveal.on( 'slidechanged', async event => {
         let questionList = extractContentFromMarkdown(event);
         apps[currentSlideIndex] = inflateVueApp(questionList);
     }
-});
+})
 
 function inflateVueApp(questions) {
     return new Vue({
@@ -87,7 +96,7 @@ function base64Decode(payloadString) {
 }
 
 function extractContentFromMarkdown(event) {
-    const pollContent = event.currentSlide.cloneNode(true);
+    const pollContent : Element = event.currentSlide.cloneNode(true);
     let answerList = Array.from(
         pollContent.querySelector('.poll ul')
             .getElementsByTagName("li"))

@@ -5,7 +5,7 @@ let config = JSON.parse(fs.readFileSync('reveal-config.json', 'utf8'));
 
 var stream = fs.createWriteStream("out/injectConfig.js");
 stream.once('open', function(fd) {
-    stream.write("let Configurator = ");
+    stream.write("export const Configurator = ");
     stream.write(JSON.stringify(config));
     stream.write(";\n");
     stream.write('console.log("Configurator loaded the following config:");\n');

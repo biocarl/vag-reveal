@@ -84,7 +84,7 @@
 
 <!-- 🔴🔴🔴🔴🔴 I want to defer all loading from script, so dom is ready first. 🔴🔴🔴🔴🔴🔴🔴-->
 {{#scriptPaths}}
-<script src="{{{.}}}" defer></script>
+<script type="module" src="{{{.}}}" defer></script>
 {{/scriptPaths}}
 
 <script>
